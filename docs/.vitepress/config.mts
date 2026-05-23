@@ -2,6 +2,9 @@ import { defineConfig } from 'vitepress';
 import {nav,sidebar} from './relaConf';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  markdown: {
+    math: true
+  },
   title: "宋宇超的个人网站",
   description: "evilmordy's web",
   themeConfig: {
