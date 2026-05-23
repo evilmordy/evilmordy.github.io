@@ -1,0 +1,173 @@
+/* ============================================
+ *  蔚蓝二次元主题 — 简约 · 大气
+ *  只追加，不覆盖默认主题
+ * ============================================ */
+
+/* ---- 1. 蔚蓝色调变量 ---- */
+:root {
+  --vp-c-brand-1: #3b82f6;
+  --vp-c-brand-2: #60a5fa;
+  --vp-c-brand-3: #93bbfd;
+  --vp-c-brand-soft: rgba(59, 130, 246, 0.14);
+
+  --vp-c-bg: #f0f5ff;
+  --vp-c-bg-soft: #e8effe;
+  --vp-c-bg-alt: #dce6fb;
+}
+
+.dark {
+  --vp-c-bg: #0a1628;
+  --vp-c-bg-soft: #0f1f3a;
+  --vp-c-bg-alt: #152a4a;
+}
+
+/* ---- 2. Hero 背景 ---- */
+.VPHero {
+  background-image: url('/uzquneen.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  position: relative !important;
+  padding-top: 100px !important;
+  padding-bottom: 120px !important;
+  margin-bottom: 48px !important;
+}
+.VPHero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.35),
+    rgba(139, 92, 246, 0.2)
+  );
+  z-index: 0;
+}
+.VPHero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- 3. Hero 文字 ---- */
+.VPHero .name,
+.VPHero .text {
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 40px rgba(117, 167, 247, 0.4) !important;
+}
+.VPHero .tagline {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* hero 文字入场：淡入上移 —— 错开 */
+.VPHero .name {
+  animation: fadeInUp 0.6s ease forwards !important;
+}
+.VPHero .text {
+  animation: fadeInUp 0.6s 0.15s ease forwards !important;
+  opacity: 0;
+}
+.VPHero .tagline {
+  animation: fadeInUp 0.6s 0.3s ease forwards !important;
+  opacity: 0;
+}
+.VPHero .actions {
+  animation: fadeInUp 0.6s 0.45s ease forwards !important;
+  opacity: 0;
+}
+
+/* ---- 4. 按钮 ---- */
+.VPButton.brand {
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+.VPButton.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+}
+
+.VPButton.alt {
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+.VPButton.alt:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- 5. Features 卡片 ---- */
+.VPFeature {
+  border-radius: 16px !important;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2) !important;
+  border: 1px solid transparent !important;
+}
+.VPFeature:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  border-color: var(--vp-c-brand-2) !important;
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* 图标放大 */
+.VPFeature .VPFeatureIcon {
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2) !important;
+}
+.VPFeature:hover .VPFeatureIcon {
+  transform: scale(1.15) !important;
+}
+
+/* ---- 6. 导航栏：在 hero 背景上保持清晰 ---- */
+.VPNavBar {
+  background: rgba(10, 22, 40, 0.55) !important;
+  backdrop-filter: blur(12px);
+}
+.VPNavBar .title,
+.VPNavBar .item,
+.VPNavBar .text {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.VPNavBar .item:hover,
+.VPNavBar .text:hover {
+  color: #fff !important;
+}
+.VPNavBarTitle .title:hover {
+  color: var(--vp-c-brand-2) !important;
+}
+/* 导航文字强制白色 */
+.VPNavBar .title,
+.VPNavBar .item,
+.VPNavBar .text {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.VPNavBar .item:hover,
+.VPNavBar .text:hover {
+  color: #fff !important;
+}
+.VPNavBarTitle .title {
+  transition: color 0.3s !important;
+}
+.VPNavBarTitle .title:hover {
+  color: var(--vp-c-brand-2) !important;
+}
+/* 搜索按钮 */
+.VPNavBarSearch {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+/* 白天/夜间切换按钮 */
+.VPNavBarAppearance {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ---- 7. 过渡曲线统一 ---- */
+a, button {
+  transition: all 0.25s ease !important;
+}
+
+/* ---- 8. 动画关键帧 ---- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
