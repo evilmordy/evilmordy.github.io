@@ -7,7 +7,9 @@
       :style="{ animationDelay: `${i * 0.12}s` }"
     >
       <a :href="item.url" target="_blank" rel="noopener noreferrer">
-        <div class="card-icon">{{ item.icon }}</div>
+        <div class="card-icon">
+          <img :src="item.icon" :alt="item.name" />
+        </div>
         <div class="card-body">
           <span class="card-name">{{ item.name }}</span>
           <span class="card-url">{{ item.displayUrl || item.url }}</span>
@@ -27,37 +29,60 @@
 // ============================================
 // 🔧 如何修改社交链接
 // ============================================
-// 1. 在下方 links 数组中复制一行 { ... },
-// 2. icon:      用 emoji 作为图标 (按 Win+. 打开表情面板挑选)
-// 3. name:      平台名称 (如 GitHub / Bilibili / 邮箱 / Twitter)
-// 4. url:       完整链接 (必须以 https:// 开头)
-// 5. displayUrl:可选，显示简化的链接文本 (如 github.com/xxx)
+// 1. 把 SVG 图标放到 docs/public/ 目录下
+//    （SVG 可从 https://simpleicons.org 下载，或 iconfont.cn 搜索）
+// 2. 在下方 links 数组中复制一行 { ... },
+// 3. icon:      图标路径，相对于 public/，如 '/github.svg'
+// 4. name:      显示的平台名称
+// 5. url:       完整链接 (https:// 或 mailto: 开头)
+// 6. displayUrl:可选，显示简化的链接文本
 //               不填则直接显示 url
-// 6. desc:      简短描述 (不超过 15 个字，用于卡片副标题)
-// 7. 想删除某个链接？直接删掉对应的 { ... }, 行即可
-// 8. 想调整排序？在数组里上下拖动对应的 { ... }, 行
+// 7. desc:      简短描述 (不超过 15 字)
+// 8. 想删除 → 删掉对应 { ... }, 即可
+// 9. 想调整排序 → 在数组里上下拖动对象
 // ============================================
 const links = [
   {
-    icon: '🌐',
+    icon: '/github.svg',
     name: 'GitHub',
     url: 'https://github.com/evilmordy',
     displayUrl: 'github.com/evilmordy',
     desc: '代码仓库与开源项目',
   },
   {
-    icon: '📺',
+    icon: '/bilibili.svg',
     name: 'Bilibili',
     url: 'https://space.bilibili.com/3546701528828459',
     displayUrl: 'bilibili.com/@时针同学',
     desc: '视频与技术分享',
   },
   {
-    icon: '📧',
-    name: '邮箱',
-    url: 'mailto:evilmordy@example.com',
-    displayUrl: 'evilmordy@example.com',
+    icon: '/推特.svg',
+    name: 'Twitter/X',
+    url: 'https://x.com/1199men',
+    displayUrl: 'x.com/1199men',
+    desc: '日常碎碎念',
+  },
+  {
+    icon: '/threads.svg',
+    name: 'Threads',
+    url: 'https://www.threads.net/@shjy_147',
+    displayUrl: 'threads.net/@shjy_147',
+    desc: '文字 & 生活',
+  },
+  {
+    icon: '/邮箱.svg',
+    name: 'QQ邮箱',
+    url: 'mailto:1119864217@qq.com',
+    displayUrl: '1119864217@qq.com',
     desc: '欢迎随时联系我',
+  },
+  {
+    icon: '/工作邮箱.svg',
+    name: '工作邮箱',
+    url: 'mailto:3999485702@qq.com',
+    displayUrl: '3999485702@qq.com',
+    desc: '聊正事的',
   },
 ]
 </script>
@@ -120,13 +145,11 @@ const links = [
     0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
-/* ========== 图标 ========== */
+/* ========== 图标容器 ========== */
 .card-icon {
-  font-size: 2.4rem;
-  line-height: 1;
-  flex-shrink: 0;
   width: 56px;
   height: 56px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,6 +160,15 @@ const links = [
     rgba(147, 51, 234, 0.1)
   );
   transition: transform 0.3s;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .social-card a:hover .card-icon {
@@ -190,33 +222,15 @@ const links = [
 
 /* ========== 动画 ========== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ========== 响应式 ========== */
 @media (max-width: 480px) {
-  .social-links {
-    grid-template-columns: 1fr;
-  }
-  .social-card a {
-    padding: 16px 18px;
-    gap: 12px;
-  }
-  .card-icon {
-    font-size: 2rem;
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-  }
-  .card-name {
-    font-size: 0.98rem;
-  }
+  .social-links { grid-template-columns: 1fr; }
+  .social-card a { padding: 16px 18px; gap: 12px; }
+  .card-icon { width: 46px; height: 46px; border-radius: 12px; padding: 10px; }
+  .card-name { font-size: 0.98rem; }
 }
 </style>

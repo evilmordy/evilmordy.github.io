@@ -17,7 +17,7 @@
            ============================================ -->
       <div v-if="section.type === 'hero'" class="hero-block">
         <div class="hero-avatar-ring">
-          <div class="hero-avatar">{{ section.icon }}</div>
+          <img class="hero-avatar-img" :src="section.icon" :alt="section.name" />
         </div>
         <h1 class="hero-name">{{ section.name }}</h1>
         <p class="hero-bio">{{ section.bio }}</p>
@@ -178,8 +178,8 @@ const sections = [
   // ===========================
   {
     type: 'hero',
-    icon: '🚀',
-    name: '时针同学',
+    icon: '/头像.png',
+    name: '宋宇超(时针)',
     bio: '战斗的意义不是憎恨！今后也请多多关照。',
   },
 
@@ -189,7 +189,7 @@ const sections = [
   {
     type: 'text',
     title: '👋 关于我',
-    content: '我是一名热爱技术的开发者，专注于<strong>机器学习、计算机视觉与深度学习</strong>方向。喜欢用代码解决实际问题，业余时间捣鼓开源项目，偶尔在 B 站分享技术内容。',
+    content: '我是不会做题的做题蛆，专注于<strong>机器学习、计算机视觉与深度学习</strong>方向，业余时间捣鼓课外的东西，偶尔在 B 站分享技术内容,艺术内容以及BA二创。',
   },
 
   // ===========================
@@ -199,8 +199,8 @@ const sections = [
     type: 'timeline',
     title: '🎓 教育背景',
     items: [
-      { year: '2024-至今', title: 'XX大学', desc: '计算机科学与技术 · 硕士在读' },
-      { year: '2020-2024', title: 'XX大学', desc: '计算机科学与技术 · 本科' },
+      { year: '2024-至今', title: '南京航空航天大学', desc: '航空航天大类 · 本科 ' },
+      { year: '2020-2024', title: '樟树中学', desc: '高中' },
     ],
   },
 
@@ -215,7 +215,6 @@ const sections = [
       { name: 'PyTorch', color: 'orange' },
       { name: 'TensorFlow', color: 'teal' },
       { name: 'OpenCV', color: 'green' },
-      { name: 'Docker', color: 'blue' },
       { name: 'Git', color: 'orange' },
       { name: 'Linux', color: 'purple' },
       { name: 'Scikit-learn', color: 'teal' },
@@ -235,10 +234,10 @@ const sections = [
     type: 'cards',
     title: '📚 推荐书单',
     items: [
-      { icon: '📙', name: '《统计学习方法》', desc: '李航 — 机器学习经典入门' },
-      { icon: '📘', name: '《深度学习》(花书)', desc: 'Ian Goodfellow — 深度学习圣经' },
-      { icon: '📗', name: '《动手学深度学习》', desc: '李沐 — 代码驱动学 DL' },
-      { icon: '📕', name: '《计算机视觉：算法与应用》', desc: 'Szeliski — CV 全景式教材' },
+      { icon: '📙', name: '《不能称受的生命之轻》', desc: '米兰昆德拉' },
+      { icon: '📘', name: '《一百个中国孩子的梦》', desc: '董宏猷 - 儿童文学的巅峰' },
+      { icon: '📗', name: '《腰门》', desc: '彭学军' },
+      { icon: '📕', name: '《我还能看到多少次满月升起》', desc: '坂本龙一' },
     ],
   },
 
@@ -249,10 +248,8 @@ const sections = [
     type: 'stats',
     title: '📊 数据一览',
     items: [
-      { label: '技术笔记', value: '60+' },
-      { label: '开源项目', value: '5+' },
-      { label: 'B 站粉丝', value: '--' },
-      { label: 'GitHub Stars', value: '--' },
+      { label: '仓库', value: '10' },
+      { label: 'B 站粉丝', value: '200+' },
     ],
   },
 ]
@@ -326,17 +323,14 @@ const sections = [
   animation: rotateRing 4s linear infinite;
 }
 
-.hero-avatar {
+.hero-avatar-img {
   position: relative;
   z-index: 1;
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  background: var(--vp-c-bg-soft);
+  object-fit: cover;
+  display: block;
   border: 4px solid var(--vp-c-bg);
 }
 
@@ -594,10 +588,9 @@ const sections = [
   .hero-name {
     font-size: 1.5rem;
   }
-  .hero-avatar {
+  .hero-avatar-img {
     width: 72px;
     height: 72px;
-    font-size: 2.4rem;
   }
   .timeline {
     padding-left: 16px;
