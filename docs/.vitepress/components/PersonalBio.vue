@@ -179,8 +179,8 @@ const sections = [
   {
     type: 'hero',
     icon: '/头像.png',
-    name: '宋宇超(时针)',
-    bio: '战斗的意义不是憎恨！今后也请多多关照。',
+    name: '时针',
+    bio: '战斗的意义不是憎恨',
   },
 
   // ===========================
@@ -189,7 +189,7 @@ const sections = [
   {
     type: 'text',
     title: '👋 关于我',
-    content: '我是不会做题的做题蛆，专注于<strong>机器学习、计算机视觉与深度学习</strong>方向，业余时间捣鼓课外的东西，偶尔在 B 站分享技术内容,艺术内容以及BA二创。',
+    content: '不会做题的做题蛆，<strong>机器学习、计算机视觉与深度学习</strong>方向，业余时间捣鼓课外的东西，偶尔在 B 站分享技术内容,艺术内容以及BA二创。',
   },
 
   // ===========================
@@ -212,15 +212,10 @@ const sections = [
     title: '🛠 技术栈',
     items: [
       { name: 'Python', color: 'blue' },
-      { name: 'PyTorch', color: 'orange' },
-      { name: 'TensorFlow', color: 'teal' },
-      { name: 'OpenCV', color: 'green' },
+      { name: '计算机视觉', color: 'green' },
       { name: 'Git', color: 'orange' },
       { name: 'Linux', color: 'purple' },
-      { name: 'Scikit-learn', color: 'teal' },
-      { name: 'Pandas', color: 'indigo' },
-      { name: 'NumPy', color: 'blue' },
-      { name: 'Vue.js', color: 'green' },
+      { name: 'React', color: 'blue' },
       { name: 'TypeScript', color: 'blue' },
       { name: 'Markdown', color: 'purple' },
       { name: 'LaTeX', color: 'red' },

@@ -5,12 +5,12 @@ export default defineConfig({
   markdown: {
     math: true
   },
-  title: "宋宇超的个人网站",
+  title: "时针的个人网站",
   description: "evilmordy's web",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: nav,
-    logo:'/uzquneen.jpg',
+    logo:'/头像.png',
 
     sidebar: sidebar,
 
