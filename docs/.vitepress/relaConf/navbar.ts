@@ -15,6 +15,14 @@ export const nav:DefaultTheme.NavItem=[
             {
                 text:'个人简介',
                 link:'/column/personal'
+            },
+            {
+                text:'友情链接',
+                link:'/column/friends/'
+            },
+            {
+                text:'日记和随笔',
+                link:'/column/diary/'
             }
         ]
     },
