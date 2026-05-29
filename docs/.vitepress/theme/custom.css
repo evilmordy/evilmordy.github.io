@@ -114,3 +114,30 @@ a, button {
     transform: translateX(-50%);
   }
 }
+
+/* ---- 9. 个人简介页 full-bleed ---- */
+.vp-doc:has(.personal-bio-page) {
+  padding-top: 0;
+}
+
+.vp-doc:has(.personal-bio-page) > h1:first-child {
+  display: none;
+}
+
+.personal-bio-page {
+  margin: -24px -24px 0;
+  width: calc(100% + 48px);
+}
+
+@media (max-width: 640px) {
+  .personal-bio-page {
+    margin: -16px -16px 0;
+    width: calc(100% + 32px);
+  }
+}
+
+/* ---- 10. 隧道/入场期间防止页面抖动 ---- */
+body.warp-tunnel-active,
+body.home-intro-active {
+  overflow: hidden;
+}

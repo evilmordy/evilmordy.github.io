@@ -19,13 +19,14 @@ export const friendLinks: FriendLink[] = [
   {
     name: 'VitePress',
     url: 'https://vitepress.dev',
-    img: '/gongzi.png',
+    img: 'https://vitepress.dev/vitepress-logo-mini.svg',
     summary: '由 Vite 驱动的静态站点生成器，本站基于此构建',
   },
+
   {
-    name: 'GitHub',
-    url: 'https://github.com',
-    img: '/github.svg',
-    summary: '全球最大的代码托管平台，开源世界的中心',
+    name:'余弦の博客',
+    url:'https://blog.cosine.ren/',
+    img:'https://blog.cosine.ren/img/avatar.webp',
+    summary:'伟大的余弦大人',
   }
 ]

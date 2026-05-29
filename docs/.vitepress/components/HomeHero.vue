@@ -1,12 +1,23 @@
 <template>
   <section class="hero">
-    <div class="hero__bg" aria-hidden="true" />
-    <ul class="hero__shapes" aria-hidden="true">
+    <div
+      class="hero__bg"
+      aria-hidden="true"
+      :style="{
+        filter: `brightness(${bgBrightness})`,
+        opacity: bgOpacity,
+      }"
+    />
+    <ul class="hero__shapes" aria-hidden="true" :style="{ opacity: shapesOpacity }">
       <li v-for="shape in shapes" :key="shape.class" :class="['hero__shape', shape.class]" />
     </ul>
 
     <div class="hero__body">
-      <div class="hero__content">
+      <div
+        class="hero__content"
+        :class="{ 'hero__content--revealed': contentRevealed }"
+        :style="{ opacity: contentOpacity }"
+      >
         <div class="hero__avatar">
           <img src="/uzquneen.jpg" alt="avatar" width="112" height="112" />
         </div>
@@ -41,12 +52,49 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { homeIntroActive, homeRevealProgress } from '../composables/useHomeIntro'
+
 const shapes = [
   { class: 'hero__shape--1' },
   { class: 'hero__shape--2' },
   { class: 'hero__shape--3' },
   { class: 'hero__shape--4' },
 ]
+
+const bgBrightness = computed(() => {
+  if (!homeIntroActive.value) return 0.35
+  const p = homeRevealProgress.value
+  if (p < 0.48) return 0.35
+  return 0.15 + p * 0.2
+})
+
+const bgOpacity = computed(() => {
+  if (!homeIntroActive.value) return 1
+  const p = homeRevealProgress.value
+  if (p < 0.48) return 0
+  if (p >= 0.68) return 1
+  return (p - 0.48) / 0.2
+})
+
+const shapesOpacity = computed(() => {
+  if (!homeIntroActive.value) return 1
+  const p = homeRevealProgress.value
+  if (p < 0.48) return 0
+  return Math.min(1, (p - 0.48) * 2.5)
+})
+
+const contentOpacity = computed(() => {
+  if (!homeIntroActive.value) return 1
+  const p = homeRevealProgress.value
+  if (p < 0.55) return 0
+  if (p >= 0.85) return 1
+  return (p - 0.55) / 0.3
+})
+
+const contentRevealed = computed(
+  () => !homeIntroActive.value || homeRevealProgress.value >= 0.55,
+)
 </script>
 
 <style scoped>
@@ -59,7 +107,7 @@ const shapes = [
   position: absolute;
   inset: 0;
   background: url('/uzquneen.jpg') center / cover no-repeat;
-  filter: brightness(0.35);
+  transition: filter 0.6s ease, opacity 0.7s ease;
 }
 
 .hero__shapes {
@@ -69,6 +117,7 @@ const shapes = [
   padding: 0;
   list-style: none;
   pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
 .hero__shape {
@@ -132,9 +181,15 @@ const shapes = [
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: opacity 0.5s ease;
 }
 
-.hero__content > * {
+.hero__content:not(.hero__content--revealed) > * {
+  animation: none !important;
+  opacity: 0;
+}
+
+.hero__content--revealed > * {
   animation: fadeInUp 0.8s ease forwards;
   opacity: 0;
 }
