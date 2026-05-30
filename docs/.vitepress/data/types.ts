@@ -14,7 +14,7 @@ export interface FriendLink {
 
 export interface DiaryEntry {
   date: string
-  img: string
+  img?: string
   content: string
   title?: string
 }

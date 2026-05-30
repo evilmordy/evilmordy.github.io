@@ -40,33 +40,62 @@
   transform: translateY(-2px);
 }
 
-/* ---- 6. 导航栏：在 hero 背景上保持清晰 ---- */
-.VPNavBar {
+/* ---- 6. 导航栏：仅首页 hero 上保持深色半透明 + 浅色字 ---- */
+.VPNavBar.home {
   background: rgba(10, 22, 40, 0.55) !important;
   backdrop-filter: blur(12px);
 }
-.VPNavBar .title,
-.VPNavBar .item,
-.VPNavBar .text {
+
+.VPNavBar.home .title,
+.VPNavBar.home .item,
+.VPNavBar.home .text {
   color: rgba(255, 255, 255, 0.9) !important;
 }
-.VPNavBar .item:hover,
-.VPNavBar .text:hover {
+
+.VPNavBar.home .item:hover,
+.VPNavBar.home .text:hover {
   color: #fff !important;
 }
-.VPNavBarTitle .title {
-  transition: color 0.3s !important;
-}
-.VPNavBarTitle .title:hover {
+
+.VPNavBar.home .VPNavBarTitle .title:hover {
   color: var(--vp-c-brand-2) !important;
 }
-/* 搜索按钮 */
-.VPNavBarSearch {
-  color: rgba(255, 255, 255, 0.7) !important;
+
+.VPNavBar.home .VPNavBarSearch,
+.VPNavBar.home .VPNavBarAppearance,
+.VPNavBar.home .VPNavBarSocialLinks :deep(.VPSocialLink) {
+  color: rgba(255, 255, 255, 0.78) !important;
 }
-/* 白天/夜间切换按钮 */
-.VPNavBarAppearance {
-  color: rgba(255, 255, 255, 0.7) !important;
+
+.VPNavBar.home .VPNavBarSearch:hover,
+.VPNavBar.home .VPNavBarAppearance:hover,
+.VPNavBar.home .VPNavBarSocialLinks :deep(.VPSocialLink:hover) {
+  color: #fff !important;
+}
+
+/* 导航栏右侧工具区：花里胡哨开关与社交/主题按钮分组 */
+.VPNavBar .content-body {
+  column-gap: 6px;
+}
+
+.nav-fancy-slot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 4px;
+  padding-left: 12px;
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+.VPNavBar.home .nav-fancy-slot {
+  border-left-color: rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 767px) {
+  .nav-fancy-slot {
+    padding-left: 8px;
+    margin-left: 2px;
+  }
 }
 
 /* ---- 7. 过渡曲线统一 ---- */
@@ -140,4 +169,121 @@ a, button {
 body.warp-tunnel-active,
 body.home-intro-active {
   overflow: hidden;
+}
+
+/* ---- 11. 流光边框：数学推导块 + 代码块（共用同一套特效） ---- */
+html:not(.fancy-effects-off) .math-derive-block,
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] {
+  position: relative;
+  margin: 1.25rem 0;
+  padding: 2px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 14px;
+  background: transparent !important;
+}
+
+html:not(.fancy-effects-off) .math-derive-block::before,
+html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 200%;
+  aspect-ratio: 1;
+  background: conic-gradient(
+    from 0deg,
+    #2563eb,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-2),
+    var(--vp-c-brand-3),
+    #dbeafe,
+    var(--vp-c-brand-3),
+    var(--vp-c-brand-2),
+    var(--vp-c-brand-1),
+    #2563eb
+  );
+  animation: fancyBorderSpin 3s linear infinite;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.dark html:not(.fancy-effects-off) .math-derive-block::before,
+.dark html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+  background: conic-gradient(
+    from 0deg,
+    #1e3a8a,
+    #2563eb,
+    var(--vp-c-brand-1),
+    var(--vp-c-brand-2),
+    var(--vp-c-brand-3),
+    var(--vp-c-brand-2),
+    var(--vp-c-brand-1),
+    #2563eb,
+    #1e3a8a
+  );
+}
+
+.math-derive-block__inner,
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.math-derive-block__inner {
+  padding: 1rem 1.25rem;
+  background: var(--vp-c-bg-soft);
+}
+
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre {
+  background-color: var(--vp-code-block-bg) !important;
+}
+
+.math-derive-block__inner > mjx-container {
+  margin: 0 !important;
+}
+
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > .copy,
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > .lang,
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > .line-numbers-wrapper {
+  z-index: 2;
+}
+
+@keyframes fancyBorderSpin {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.fancy-effects-off) .math-derive-block::before,
+  html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+    animation: none;
+  }
+}
+
+/* 花里胡哨关：朴素样式 */
+html.fancy-effects-off .math-derive-block {
+  margin: 1.25rem 0;
+  padding: 0;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 14px;
+  background: var(--vp-c-bg-soft);
+}
+
+html.fancy-effects-off .math-derive-block::before {
+  display: none;
+}
+
+html.fancy-effects-off .vp-doc div[class*='language-'] {
+  padding: 0;
+}
+
+html.fancy-effects-off .vp-doc div[class*='language-']::before {
+  display: none;
 }

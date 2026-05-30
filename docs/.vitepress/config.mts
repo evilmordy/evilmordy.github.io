@@ -1,9 +1,13 @@
 import { defineConfig } from 'vitepress';
 import {nav,sidebar} from './relaConf';
+import { mathDeriveBlockPlugin } from './markdown/mathDeriveBlock';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   markdown: {
-    math: true
+    math: true,
+    config(md) {
+      md.use(mathDeriveBlockPlugin)
+    },
   },
   title: "时针的个人网站",
   description: "evilmordy's web",

@@ -115,8 +115,8 @@ function onClick(e: MouseEvent) {
   const now = performance.now()
 
   const rippleConfigs = [
-    { maxRadius: 70, duration: 520, hue: 210, waveFreq: 6 },
-    { maxRadius: 100, duration: 580, hue: 220, waveFreq: 8 },
+    { maxRadius: 42, duration: 520, hue: 210, waveFreq: 6 },
+    { maxRadius: 60, duration: 580, hue: 220, waveFreq: 8 },
   ]
 
   for (const cfg of rippleConfigs) {
@@ -142,8 +142,8 @@ function onClick(e: MouseEvent) {
       angle: (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4,
       birthTime: now,
       duration: 650 + Math.random() * 200,
-      size: 4 + Math.random() * 8,
-      speed: 2.5 + Math.random() * 3.5,
+      size: 2.4 + Math.random() * 4.8,
+      speed: 1.5 + Math.random() * 2.1,
       color: pickBlueColor(),
       spin: (Math.random() - 0.5) * 0.2,
     })
@@ -219,7 +219,7 @@ function drawRipple(ripple: Ripple, now: number) {
   ctx.beginPath()
   for (let i = 0; i <= segments; i++) {
     const angle = (i / segments) * Math.PI * 2
-    const wobble = Math.sin(angle * ripple.waveFreq + ripple.phase + progress * 6) * (3 + progress * 4)
+    const wobble = Math.sin(angle * ripple.waveFreq + ripple.phase + progress * 6) * (1.8 + progress * 2.4)
     const r = radius + wobble
     const x = ripple.x + Math.cos(angle) * r
     const y = ripple.y + Math.sin(angle) * r
@@ -239,7 +239,7 @@ function drawTriangle(burst: TriangleBurst, now: number) {
   if (progress >= 1) return
 
   const eased = easeOutCubic(progress)
-  const distance = eased * burst.speed * 40
+  const distance = eased * burst.speed * 24
   const alpha = 1 - progress
   const size = burst.size * (1 - progress * 0.7)
   const rotation = burst.angle + burst.spin * progress * 10

@@ -51,3 +51,53 @@
 - IMU弥补输VO出频率不高和过渡依赖光照和速度限制的不足
 - VO弥补IMU存在漂移误差的不足
 
+具体的原理涉及李代数和滤波的数学知识，这个我看以后有没有时间更吧...
+
+
+
+### 数据融合的方式
+
+#### 松耦合
+
+IMU和相机分别解算完自身的运动估计，然后对结果进行数据融合，鲁棒性不如紧耦合
+
+#### 紧耦合
+
+先把IMU的状态和相机的状态合并在一起，共同构建运动方程和观测方程，然后进行位姿状态的解算。分为基于滤波(Filter)和基于优化(optimization)两个研究方向
+
+
+
+### 常见算法
+
+#### 基于滤波器
+
+- MSCKF：为了解决EKF-SLAM需要一个初始深度和协方差，选择不正确后面就不会收敛的问题。原始的MSCKF算法提出了一个度量模型，该模型表达了观察特定图像特征的所有相机姿态之间的几何约束，而不需要在状态向量中维护3D路标点位置的估计。Alex Zihao Zhu等人实现了一个基于事件相机（Event-based Camera）输入的使用MSCKF后端的里程计，后面该实现被改造成可接收普通相机特征跟踪信息的版本
+  仓库： https://github.com/daniilidis-group/msckf_mono
+  论文：https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8100099
+- ROVIO：计算量小，但是没有闭环会残留误差。
+  仓库：https://github.com/ethz-asl/rovio
+  论文：https://www.doc.ic.ac.uk/~sleutene/publications/ijrr2014_revision_1.pdf
+
+#### 基于优化
+
+- OKVIS：前端：多目+IMU 后端：ceres solver优化库，基于关键帧的滑动窗口
+
+  仓库：https://github.com/ethz-asl/okvis 
+  论文：https://www.doc.ic.ac.uk/~sleutene/publications/ijrr2014_revision_1.pdf
+
+- VINS-Mono: 设备只要求单目，鲁棒性强，前端基于KLT跟踪算法， 后端基于滑动窗口的优化(采用ceres库)， DBoW的回环检测
+  仓库：https://github.com/HKUST-Aerial-Robotics/VINS-Mono，
+  论文：https://ieeexplore.ieee.org/document/8421746
+
+## 参考
+
+https://zhuanlan.zhihu.com/p/148412316
+
+https://blog.csdn.net/Night___Raid/article/details/108223615
+
+https://www.cnblogs.com/hitcm/p/6327442.html
+
+
+
+
+

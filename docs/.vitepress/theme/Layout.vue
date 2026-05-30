@@ -6,6 +6,7 @@ import ClickParticles from '../components/ClickParticles.vue'
 import HomeHero from '../components/HomeHero.vue'
 import HomeFeatures from '../components/HomeFeatures.vue'
 import HomeIntroOverlay from '../components/HomeIntroOverlay.vue'
+import FancyEffectsToggle from '../components/FancyEffectsToggle.vue'
 import { shouldPlayIntro, markIntroPlayed } from '../composables/useFirstVisitIntro'
 
 const { Layout } = DefaultTheme
@@ -40,6 +41,11 @@ watch(
     </template>
     <template #home-features-after>
       <HomeFeatures />
+    </template>
+    <template #nav-bar-content-after>
+      <div class="nav-fancy-slot">
+        <FancyEffectsToggle />
+      </div>
     </template>
     <template #layout-bottom>
       <HomeIntroOverlay v-if="playHomeIntro" :key="introKey" />
