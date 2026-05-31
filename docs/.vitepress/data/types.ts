@@ -17,6 +17,8 @@ export interface DiaryEntry {
   img?: string
   content: string
   title?: string
+  tags?: string[]
+  mood?: string
 }
 
 export type PersonalBioTagItem = string | { name: string; color?: string }

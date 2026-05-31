@@ -165,6 +165,26 @@ a, button {
   }
 }
 
+/* ---- 9b. 日记和随笔页：隐藏标题 + 负边距全宽 */
+.vp-doc:has(.diary-page) {
+  padding-top: 0;
+}
+.vp-doc:has(.diary-page) > h1:first-child {
+  display: none;
+}
+.diary-page {
+  margin: -12px -24px 0;
+  width: calc(100% + 48px);
+  padding: 0 24px;
+}
+@media (max-width: 640px) {
+  .diary-page {
+    margin: -8px -16px 0;
+    width: calc(100% + 32px);
+    padding: 0 16px;
+  }
+}
+
 /* ---- 10. 隧道/入场期间防止页面抖动 ---- */
 body.warp-tunnel-active,
 body.home-intro-active {
