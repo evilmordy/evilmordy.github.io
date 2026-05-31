@@ -9,3 +9,4 @@
 - [AI 生产力工具](/notes/AI生产力工具/vibecoding)
 - [数据结构](/notes/数据结构/1-链表)
 - [大创-无人机与自主导航](/notes/大创-无人机与自主导航/01-IMU.md)
+- [ROS2](/notes/ROS2/01-安装.md)
