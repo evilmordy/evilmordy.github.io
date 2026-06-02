@@ -86,7 +86,7 @@ IMU和相机分别解算完自身的运动估计，然后对结果进行数据�
   论文：https://www.doc.ic.ac.uk/~sleutene/publications/ijrr2014_revision_1.pdf
 
 - VINS-Mono: 设备只要求单目，鲁棒性强，前端基于KLT跟踪算法， 后端基于滑动窗口的优化(采用ceres库)， DBoW的回环检测
-  仓库：https://github.com/HKUST-Aerial-Robotics/VINS-Mono，
+  仓库：https://github.com/HKUST-Aerial-Robotics/VINS-Mono
   论文：https://ieeexplore.ieee.org/document/8421746
 
 ## 参考
