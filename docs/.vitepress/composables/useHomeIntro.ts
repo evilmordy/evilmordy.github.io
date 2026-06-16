@@ -17,7 +17,3 @@ export function finishHomeIntro() {
   homeRevealProgress.value = 1
 }
 
-export function resetHomeIntro() {
-  homeIntroActive.value = false
-  homeRevealProgress.value = 0
-}

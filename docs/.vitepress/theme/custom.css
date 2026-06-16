@@ -185,6 +185,26 @@ a, button {
   }
 }
 
+/* ---- 9c. 知识库目录页：组件化目录 ---- */
+.vp-doc:has(.notes-overview-page) {
+  padding-top: 0;
+}
+.vp-doc:has(.notes-overview-page) > h1:first-child {
+  display: none;
+}
+.notes-overview-page {
+  margin: -12px -24px 0;
+  width: calc(100% + 48px);
+  padding: 0 24px;
+}
+@media (max-width: 640px) {
+  .notes-overview-page {
+    margin: -8px -16px 0;
+    width: calc(100% + 32px);
+    padding: 0 16px;
+  }
+}
+
 /* ---- 10. 隧道/入场期间防止页面抖动 ---- */
 body.warp-tunnel-active,
 body.home-intro-active {

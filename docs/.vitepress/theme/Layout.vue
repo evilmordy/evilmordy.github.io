@@ -4,7 +4,7 @@ import { useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import ClickParticles from '../components/ClickParticles.vue'
 import HomeHero from '../components/HomeHero.vue'
-import HomeFeatures from '../components/HomeFeatures.vue'
+import HomeKnowledgeLanding from '../components/HomeKnowledgeLanding.vue'
 import HomeIntroOverlay from '../components/HomeIntroOverlay.vue'
 import FancyEffectsToggle from '../components/FancyEffectsToggle.vue'
 import { shouldPlayIntro, markIntroPlayed } from '../composables/useFirstVisitIntro'
@@ -40,7 +40,7 @@ watch(
       <HomeHero />
     </template>
     <template #home-features-after>
-      <HomeFeatures />
+      <HomeKnowledgeLanding />
     </template>
     <template #nav-bar-content-after>
       <div class="nav-fancy-slot">

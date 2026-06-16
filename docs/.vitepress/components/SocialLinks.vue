@@ -26,65 +26,7 @@
 </template>
 
 <script setup>
-// ============================================
-// 🔧 如何修改社交链接
-// ============================================
-// 1. 把 SVG 图标放到 docs/public/ 目录下
-//    （SVG 可从 https://simpleicons.org 下载，或 iconfont.cn 搜索）
-// 2. 在下方 links 数组中复制一行 { ... },
-// 3. icon:      图标路径，相对于 public/，如 '/github.svg'
-// 4. name:      显示的平台名称
-// 5. url:       完整链接 (https:// 或 mailto: 开头)
-// 6. displayUrl:可选，显示简化的链接文本
-//               不填则直接显示 url
-// 7. desc:      简短描述 (不超过 15 字)
-// 8. 想删除 → 删掉对应 { ... }, 即可
-// 9. 想调整排序 → 在数组里上下拖动对象
-// ============================================
-const links = [
-  {
-    icon: '/github.svg',
-    name: 'GitHub',
-    url: 'https://github.com/evilmordy',
-    displayUrl: 'github.com/evilmordy',
-    desc: '代码仓库与开源项目',
-  },
-  {
-    icon: '/bilibili.svg',
-    name: 'Bilibili',
-    url: 'https://space.bilibili.com/3546701528828459',
-    displayUrl: 'loveryou-',
-    desc: '视频与分享',
-  },
-  {
-    icon: '/推特.svg',
-    name: 'Twitter/X',
-    url: 'https://x.com/pysimpom',
-    displayUrl: 'x.com/pysimpom',
-    desc: '来关注我的推特',
-  },
-  {
-    icon: '/threads.svg',
-    name: 'Threads',
-    url: 'https://www.threads.net/@pysimpom',
-    displayUrl: 'threads.net/@pysimpom',
-    desc: '文字 & 生活',
-  },
-  {
-    icon: '/邮箱.svg',
-    name: 'QQ邮箱',
-    url: 'mailto:1119864217@qq.com',
-    displayUrl: '1119864217@qq.com',
-    desc: '欢迎随时联系我',
-  },
-  {
-    icon: '/工作邮箱.svg',
-    name: '工作邮箱',
-    url: 'mailto:3999485702@qq.com',
-    displayUrl: '3999485702@qq.com',
-    desc: '聊正事的',
-  },
-]
+import { socialLinks as links } from '../data/socialLinks'
 </script>
 
 <style scoped>

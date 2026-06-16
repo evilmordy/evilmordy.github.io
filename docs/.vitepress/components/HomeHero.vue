@@ -172,8 +172,8 @@ const contentRevealed = computed(
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: clamp(520px, 72vh, 680px);
-  padding: calc(var(--vp-nav-height, 64px) + 48px) 24px 140px;
+  min-height: clamp(430px, 58vh, 560px);
+  padding: calc(var(--vp-nav-height, 64px) + 38px) 24px 118px;
 }
 
 .hero__content {
@@ -202,13 +202,13 @@ const contentRevealed = computed(
 .hero__content > :nth-child(6) { animation-delay: 0.9s; }
 
 .hero__avatar {
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .hero__avatar img {
   display: block;
-  width: 112px;
-  height: 112px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid rgba(255, 255, 255, 0.28);
@@ -224,7 +224,7 @@ const contentRevealed = computed(
 .hero__title-text {
   display: inline-block;
   padding-block: 0.12em;
-  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-size: clamp(1.9rem, 5vw, 3rem);
   font-weight: 800;
   letter-spacing: 0.12em;
   line-height: 1.35;
@@ -243,7 +243,7 @@ const contentRevealed = computed(
 }
 
 .hero__motto {
-  margin: 0 0 36px;
+  margin: 0 0 28px;
   font-size: 0.92rem;
   line-height: 1.6;
   font-style: italic;
@@ -255,7 +255,7 @@ const contentRevealed = computed(
   flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
-  margin-bottom: 32px;
+  margin-bottom: 26px;
 }
 
 .hero__btn {

@@ -75,6 +75,20 @@ description: 从 PDF 中提取文本和表格，填写表单，并合并文档
 
 Codex十分强大，我在等它出Linux版本，其它操作系统的用户可以去体验一下
 
+## MCP
+一种通信协议，详细请看：[MCP协议](/notes/AI生产力工具/MCP协议)
+
+## 配置API Key 使用AI模型
+### 从官网开放平台获取API Key
+例如[deepseek开放平台](https://platform.deepseek.com/usage),然后就充值，复制API Key.
+注意API Key只能复制一次！
+### 其它AI平台获取API Key
+常见的平台有OpenRouter,Ofox；ofox是没有地区限制的，用国外模型开个梯子就能连上
+都是只能复制一次！请妥善保管您的API Key!只能在本地上，不能暴露给任何AI任何人！
+
+备份好API Key，然后就按照各个平台的官方文档去配置，填写到相应的位置即可。
+
+
 ## 注意
 
 没有基础不建议vibecoding,别变成拿着localhost在社交平台上发疯的沙毕。

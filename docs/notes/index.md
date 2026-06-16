@@ -1,12 +1,10 @@
-# 我的知识库
+---
+title: 我的知识库
+outline: false
+---
 
-更新可能会有点慢，在慢慢学习......
+<script setup>
+import NotesOverview from '../.vitepress/components/NotesOverview.vue'
+</script>
 
-- [机器学习](/notes/机器学习/0-基本库/01-numpy手册)
-- [深度学习](/notes/深度学习/深度学习的概念)
-- [大创-计算机视觉](/notes/大创-计算机视觉/opencv)
-- [数学](/notes/数学/抽象代数/群)
-- [AI 生产力工具](/notes/AI生产力工具/vibecoding)
-- [数据结构](/notes/数据结构/1-链表)
-- [大创-无人机与自主导航](/notes/大创-无人机与自主导航/01-IMU.md)
-- [ROS2](/notes/ROS2/01-安装.md)
+<NotesOverview />

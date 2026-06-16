@@ -62,3 +62,37 @@ MCP的配置，最好的方式是**去看官方文档**，比如搞科研的小�
 这个时候就可以用AI做blender了！配置SKILLS规范AI能让AI的行为更好哦～
 
 点击`Disconnect from MCP Server`，即可断开链接。
+
+## Context7
+
+Context7是基于MCP的“文档拉取”服务。注入从源头获取的、与你所用库版本完全对应的官方文档和代码示例，从而避免：
+
+- 过时的示例、基于老旧训练数据的答案
+- 大模型幻觉（hallucination）出不存在的 API
+- 能跑但是版本不符合的code
+
+### 下载
+[官网](https://context7.com/install)
+按照官网的提示，也就是：
+```bash
+npx ctx7 setup
+```
+然后会让你选择选项，选择MCP Server回车
+
+就会看到让你选择要安装的地方，比如Claude Code,cursor,opencode,codex,Antigravity
+
+选择你使用的安装即可，要登陆授权的步骤也很简单，授权就可以了
+
+### 使用
+
+在prompt末尾加上 use context7，例如：
+
+```txt
+Create a Next.js middleware that checks for a valid JWT in cookies and redirects unauthenticated users to `/login`. use context7
+```
+
+### 计费
+
+[官网计费介绍页面](https://context7.com/plans)
+
+有Free Plan 但是有限制，限制频率和次数（好像是每月1000次）

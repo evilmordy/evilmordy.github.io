@@ -1,8 +1,27 @@
-export interface HomeCard {
+export interface NoteArticle {
+  title: string
+  link: string
+  category: string
+  path: string
+}
+
+export interface NoteCategory {
+  name: string
   title: string
   details: string
   img: string
   link: string
+  count: number
+  subCount: number
+  articles: NoteArticle[]
+}
+
+export interface SocialLink {
+  icon: string
+  name: string
+  url: string
+  displayUrl?: string
+  desc: string
 }
 
 export interface FriendLink {

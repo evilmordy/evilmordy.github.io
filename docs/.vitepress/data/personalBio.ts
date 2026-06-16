@@ -68,7 +68,7 @@ export const sections: PersonalBioSection[] = [
     items: [
       { label: '仓库', value: '10' },
       { label: 'B 站粉丝', value: '200+' },
-      {label:'X followers', value: '60+'},
+      {label:'X followers', value: '80+'},
     ],
   },
 ]
