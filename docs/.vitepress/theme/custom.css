@@ -211,9 +211,10 @@ body.home-intro-active {
   overflow: hidden;
 }
 
-/* ---- 11. 流光边框：数学推导块 + 代码块（共用同一套特效） ---- */
+/* ---- 11. 流光边框：数学推导块 + 代码块 + Mermaid 卡片（共用同一套特效） ---- */
 html:not(.fancy-effects-off) .math-derive-block,
-html:not(.fancy-effects-off) .vp-doc div[class*='language-'] {
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'],
+html:not(.fancy-effects-off) .vp-doc .mermaid-block {
   position: relative;
   margin: 1.25rem 0;
   padding: 2px;
@@ -224,7 +225,8 @@ html:not(.fancy-effects-off) .vp-doc div[class*='language-'] {
 }
 
 html:not(.fancy-effects-off) .math-derive-block::before,
-html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before,
+html:not(.fancy-effects-off) .vp-doc .mermaid-block::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -251,7 +253,8 @@ html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
 }
 
 .dark html:not(.fancy-effects-off) .math-derive-block::before,
-.dark html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+.dark html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before,
+.dark html:not(.fancy-effects-off) .vp-doc .mermaid-block::before {
   background: conic-gradient(
     from 0deg,
     #1e3a8a,
@@ -267,7 +270,8 @@ html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
 }
 
 .math-derive-block__inner,
-html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre {
+html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre,
+html:not(.fancy-effects-off) .vp-doc .mermaid-block > .mermaid-block__inner {
   position: relative;
   z-index: 1;
   margin: 0;
@@ -282,6 +286,15 @@ html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre {
 
 html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > pre {
   background-color: var(--vp-code-block-bg) !important;
+}
+
+html:not(.fancy-effects-off) .vp-doc .mermaid-block > .mermaid-block__inner {
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+}
+
+html:not(.fancy-effects-off) .vp-doc .mermaid-block.is-source > .mermaid-block__inner {
+  background: var(--vp-code-block-bg);
 }
 
 .math-derive-block__inner > mjx-container {
@@ -302,13 +315,15 @@ html:not(.fancy-effects-off) .vp-doc div[class*='language-'] > .line-numbers-wra
 
 @media (prefers-reduced-motion: reduce) {
   html:not(.fancy-effects-off) .math-derive-block::before,
-  html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before {
+  html:not(.fancy-effects-off) .vp-doc div[class*='language-']::before,
+  html:not(.fancy-effects-off) .vp-doc .mermaid-block::before {
     animation: none;
   }
 }
 
 /* 花里胡哨关：朴素样式 */
-html.fancy-effects-off .math-derive-block {
+html.fancy-effects-off .math-derive-block,
+html.fancy-effects-off .vp-doc .mermaid-block {
   margin: 1.25rem 0;
   padding: 0;
   border: 1px solid rgba(59, 130, 246, 0.2);
@@ -316,7 +331,12 @@ html.fancy-effects-off .math-derive-block {
   background: var(--vp-c-bg-soft);
 }
 
-html.fancy-effects-off .math-derive-block::before {
+html.fancy-effects-off .vp-doc .mermaid-block.is-source {
+  background: var(--vp-code-block-bg);
+}
+
+html.fancy-effects-off .math-derive-block::before,
+html.fancy-effects-off .vp-doc .mermaid-block::before {
   display: none;
 }
 
@@ -326,4 +346,201 @@ html.fancy-effects-off .vp-doc div[class*='language-'] {
 
 html.fancy-effects-off .vp-doc div[class*='language-']::before {
   display: none;
+}
+
+/* ---- 12. Mermaid：左上角图/源码切换卡片 ---- */
+.vp-doc .mermaid-block {
+  margin: 1.25rem 0;
+}
+
+.vp-doc .mermaid-block__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 10px 8px;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.14);
+}
+
+.dark .vp-doc .mermaid-block__toolbar {
+  border-bottom-color: rgba(96, 165, 250, 0.18);
+}
+
+.vp-doc .mermaid-block__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.vp-doc .mermaid-block__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.vp-doc .mermaid-block__tab:hover {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-2);
+  background: var(--vp-c-brand-soft);
+}
+
+.vp-doc .mermaid-block__tab.is-active {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  box-shadow: 0 1px 8px rgba(59, 130, 246, 0.18);
+}
+
+.vp-doc .mermaid-block__tab:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.dark .vp-doc .mermaid-block__tab {
+  background: rgba(10, 22, 40, 0.72);
+  border-color: rgba(96, 165, 250, 0.28);
+}
+
+.dark .vp-doc .mermaid-block__tab.is-active,
+.dark .vp-doc .mermaid-block__tab:hover {
+  color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.vp-doc .mermaid-block__icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vp-doc .mermaid-block__copy {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid rgba(59, 130, 246, 0.22);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.vp-doc .mermaid-block__copy:hover,
+.vp-doc .mermaid-block__copy.is-copied {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.vp-doc .mermaid-block__panel {
+  min-height: 4.5rem;
+}
+
+.vp-doc .mermaid-block__panel[hidden] {
+  display: none !important;
+}
+
+.vp-doc .mermaid-block__panel--diagram {
+  padding: 1rem 1.15rem 1.15rem;
+  overflow-x: auto;
+}
+
+.vp-doc .mermaid-block.is-loading .mermaid-diagram__svg {
+  opacity: 0.35;
+}
+
+.vp-doc .mermaid-diagram__svg {
+  display: flex;
+  justify-content: center;
+  min-height: 4.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.vp-doc .mermaid-diagram__svg svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.vp-doc .mermaid-diagram__error {
+  color: var(--vp-c-danger-1, #ef4444);
+  font-size: 0.9rem;
+}
+
+.vp-doc .mermaid-diagram__error pre {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc .mermaid-block__fallback {
+  margin: 0;
+  padding: 0.9rem 1.15rem 1.1rem;
+  overflow-x: auto;
+  font-size: var(--vp-code-font-size, 14px);
+  line-height: var(--vp-code-line-height, 1.7);
+}
+
+/* 内嵌源码：去掉第二层代码块外壳，避免双边框/双流光 */
+.vp-doc .mermaid-block div[class*='language-'] {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  overflow: visible;
+}
+
+.vp-doc .mermaid-block div[class*='language-']::before {
+  display: none !important;
+  content: none !important;
+  animation: none !important;
+}
+
+.vp-doc .mermaid-block div[class*='language-'] > .copy,
+.vp-doc .mermaid-block div[class*='language-'] > .lang {
+  display: none !important;
+}
+
+.vp-doc .mermaid-block div[class*='language-'] > pre {
+  margin: 0;
+  padding: 0.85rem 1.15rem 1.1rem !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 420px) {
+  .vp-doc .mermaid-block__tab {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
 }

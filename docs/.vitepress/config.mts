@@ -1,12 +1,19 @@
 import { defineConfig } from 'vitepress';
 import {nav,sidebar} from './relaConf';
 import { mathDeriveBlockPlugin } from './markdown/mathDeriveBlock';
+import { mermaidPlugin } from './markdown/mermaid';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   markdown: {
     math: true,
     config(md) {
       md.use(mathDeriveBlockPlugin)
+      md.use(mermaidPlugin)
+    },
+  },
+  vite: {
+    optimizeDeps: {
+      include: ['mermaid'],
     },
   },
   title: "时针的个人网站",
