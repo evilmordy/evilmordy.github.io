@@ -63,6 +63,11 @@ const categoryMeta: Record<string, { title?: string; details: string; img?: stri
     img: '/mika.png',
     order: 80,
   },
+  '踩坑大合集': {
+    details: '开发、环境和工具链里踩过的坑，对照记录方便下次少走弯路。',
+    img: '/aii.jpeg',
+    order: 90,
+  },
 }
 
 function stripFrontmatter(raw: string) {
