@@ -5,6 +5,7 @@
  * 展示维护：在 categoryMeta 中集中配置分类标题、描述、封面和排序。
  */
 import type { NoteArticle, NoteCategory } from './types'
+import { compareByDateDesc, parseNoteDate } from './noteDate'
 
 const noteFiles = import.meta.glob('../../notes/**/*.md', {
   query: '?raw',
@@ -23,12 +24,12 @@ const fallbackImages = [
 
 const categoryMeta: Record<string, { title?: string; details: string; img?: string; order: number }> = {
   '机器学习': {
-    details: '从基础库、线性回归到神经网络，把模型训练拆成可复习的路线。',
+    details: '从基础库、线性回归到神经网络，原课程为吴恩达老师的机器学习课程。',
     img: '/gongzi.png',
     order: 10,
   },
   '深度学习': {
-    details: '记录深度学习核心概念、模型理解和持续补全的学习笔记。',
+    details: '等待补充。',
     img: '/aris.jpg',
     order: 20,
   },
@@ -38,12 +39,12 @@ const categoryMeta: Record<string, { title?: string; details: string; img?: stri
     order: 30,
   },
   '大创-无人机与自主导航': {
-    details: 'IMU、VO/VIO、雅可比矩阵等自主导航方向的专题整理。',
+    details: 'IMU、VO/VIO等自主导航方向的专题整理。',
     img: '/qinxiang.png',
     order: 40,
   },
   '数学': {
-    details: '把抽象代数等数学内容沉淀成可以反复翻看的推导。',
+    details: '抽象代数等，等待补充。',
     img: '/mary.jpg',
     order: 50,
   },
@@ -59,12 +60,12 @@ const categoryMeta: Record<string, { title?: string; details: string; img?: stri
     order: 70,
   },
   'ROS2': {
-    details: '从安装、小海龟命令行到工作空间和功能包的 ROS2 入门路线。',
+    details: '原课程为古月居的ROS2, 可对照视频观看。',
     img: '/mika.png',
     order: 80,
   },
   '踩坑大合集': {
-    details: '开发、环境和工具链里踩过的坑，对照记录方便下次少走弯路。',
+    details: '开发、环境和工具链里踩过的坑。',
     img: '/aii.jpeg',
     order: 90,
   },
@@ -102,11 +103,13 @@ export function getNoteCategories(): NoteCategory[] {
     if (!category || !isUsefulArticle(relativePath)) continue
 
     const fileName = parts[parts.length - 1]
+    const raw = noteFiles[filePath]
     const article: NoteArticle = {
-      title: titleFromMarkdown(noteFiles[filePath], fileName),
+      title: titleFromMarkdown(raw, fileName),
       link: linkFromRelativePath(relativePath),
       category,
       path: relativePath,
+      date: parseNoteDate(raw, fileName),
     }
 
     const articles = grouped.get(category) || []
@@ -123,16 +126,22 @@ export function getNoteCategories(): NoteCategory[] {
   return Array.from(grouped.entries())
     .map(([name, articles], index) => {
       const meta = categoryMeta[name]
-      const sortedArticles = articles.sort((a, b) => a.path.localeCompare(b.path, 'zh-Hans-CN'))
+      const dated = articles.some((article) => article.date)
+      const sortedArticles = dated
+        ? [...articles].sort(compareByDateDesc)
+        : [...articles].sort((a, b) => a.path.localeCompare(b.path, 'zh-Hans-CN'))
+      const hasIndex = `../../notes/${name}/index.md` in noteFiles
 
       return {
         name,
         title: meta?.title || name,
         details: meta?.details || '持续整理中的学习笔记与实践记录。',
         img: meta?.img || fallbackImages[index % fallbackImages.length],
-        link: sortedArticles[0]?.link || `/notes/${name}/`,
+        link: hasIndex ? `/notes/${name}/` : sortedArticles[0]?.link || `/notes/${name}/`,
         count: sortedArticles.length,
         subCount: subFolders.get(name)?.size || 0,
+        dated,
+        latestDate: sortedArticles.find((article) => article.date)?.date,
         articles: sortedArticles,
       }
     })

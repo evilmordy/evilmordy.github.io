@@ -197,8 +197,22 @@ a, button {
   width: calc(100% + 48px);
   padding: 0 24px;
 }
+
+/* ---- 9d. 踩坑大合集等带日期的分类页 ---- */
+.vp-doc:has(.dated-notes-page) {
+  padding-top: 0;
+}
+.vp-doc:has(.dated-notes-page) > h1:first-child {
+  display: none;
+}
+.dated-notes-page {
+  margin: -12px -24px 0;
+  width: calc(100% + 48px);
+  padding: 0 24px;
+}
 @media (max-width: 640px) {
-  .notes-overview-page {
+  .notes-overview-page,
+  .dated-notes-page {
     margin: -8px -16px 0;
     width: calc(100% + 32px);
     padding: 0 16px;

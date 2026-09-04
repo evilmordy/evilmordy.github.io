@@ -28,7 +28,7 @@
         <div class="section-head" data-reveal>
           <span class="section-kicker">Knowledge Base</span>
           <h2>知识库</h2>
-          <p>每个大文件夹对应一个学习方向。这里是首页主内容，按主题竖直展开。</p>
+          <p>有很多模块还在更新中......</p>
         </div>
 
         <div class="knowledge-list">
@@ -47,7 +47,8 @@
             <div class="knowledge-card__body">
               <div class="knowledge-card__meta">
                 <span>{{ category.count }} 篇笔记</span>
-                <span v-if="category.subCount">{{ category.subCount }} 个专题</span>
+                <span v-if="category.latestDate">最新 {{ category.latestDate }}</span>
+                <span v-else-if="category.subCount">{{ category.subCount }} 个专题</span>
               </div>
               <h3>{{ category.title }}</h3>
               <p>{{ category.details }}</p>
@@ -86,7 +87,7 @@ const exploreItems = [
   },
   {
     icon: '↗',
-    title: '社交账号和邮箱',
+    title: '账号和邮箱',
     desc: `${socialLinks.length} 个入口`,
     link: '/column/media/',
   },

@@ -7,6 +7,7 @@ import HomeHero from '../components/HomeHero.vue'
 import HomeKnowledgeLanding from '../components/HomeKnowledgeLanding.vue'
 import HomeIntroOverlay from '../components/HomeIntroOverlay.vue'
 import FancyEffectsToggle from '../components/FancyEffectsToggle.vue'
+import DocNoteDate from '../components/DocNoteDate.vue'
 import { shouldPlayIntro, markIntroPlayed } from '../composables/useFirstVisitIntro'
 
 const { Layout } = DefaultTheme
@@ -41,6 +42,9 @@ watch(
     </template>
     <template #home-features-after>
       <HomeKnowledgeLanding />
+    </template>
+    <template #doc-before>
+      <DocNoteDate />
     </template>
     <template #nav-bar-content-after>
       <div class="nav-fancy-slot">

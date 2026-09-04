@@ -1,6 +1,6 @@
 # vibecoding
 
-这玩意怎么说呢，不好评价
+这玩意怎么说呢，不好评价，因为模型能力提升了，但安全性却没有随之上升。
 
 ## 分清几个概念
 
@@ -14,19 +14,17 @@ AI的很多概念其实都挺简单：
 
 大模型就是直接和你对话，读取prompt，从prompt生成回答的东西，比如ChatGPT
 
-高质量编程建议使用`opus4.6`,`gpt5.5`
+如果你是富哥：`opus`,`fable`,`gpt`,`grok` 御三家的模型(Gemini被踢了，悲),国内的Fable级模型是`Kimi K3`
 
-简单任务(比如不涉及特别重要的业务)：`Kimi2.5`,`Composer2.5`,`Deepseek-v4-flash`,`Deepseek-v4-pro`,`GLM5.1`等，反正你刷多了，推特首页全你妈是老登的测评和资本家的吹嘘。
+其它选择：`Qwen`,`Composer`,`Deepseek-vxx-flash`,`Deepseek-vxx-pro`,`GLM5`,`Gemini`等，反正你刷多了，推特首页全你妈是老登的测评和资本家的吹嘘。
 
-我做blender和正经任务肯定是opus,网页小游戏，纯前端用的是Composer2.5和Deepseek
-
-老马要推出Grok了，高低得尝尝咸淡～
 
 ### Agent
 
 AI一开始只能和我们对话，根据AI输出的答案操作电脑的就是Agent工具，比如读文件，写入文件，在终端输入命令并执行
 
 一般的工具都有Agent模式和Plan模式，Plan就是先和AI商量好要干什么，确定计划后再执行，防止改烂了或AI没有理解我们的需求，在opencode里，对应`Build`和`Plan`模式
+
 
 ### SKILLS
 
@@ -66,14 +64,12 @@ description: 从 PDF 中提取文本和表格，填写表单，并合并文档
 
 ## 常用的工具
 
-- Claude Code(最常用)
+- Claude Code
 - Codex
 - cursor
 - opencode
-
-我用的是cursor,因为支持银联和支付宝，也用opencode，但是通常处理小任务
-
-Codex十分强大，我在等它出Linux版本，其它操作系统的用户可以去体验一下
+- Grok Build
+- Deepseek Harness
 
 ## MCP
 一种通信协议，详细请看：[MCP协议](/notes/AI生产力工具/MCP协议)
@@ -81,18 +77,21 @@ Codex十分强大，我在等它出Linux版本，其它操作系统的用户可�
 ## 配置API Key 使用AI模型
 ### 从官网开放平台获取API Key
 例如[deepseek开放平台](https://platform.deepseek.com/usage),然后就充值，复制API Key.
-注意API Key只能复制一次！
+注意API Key只能复制一次(通常)
+
 ### 其它AI平台获取API Key
 常见的平台有OpenRouter,Ofox；ofox是没有地区限制的，用国外模型开个梯子就能连上
 都是只能复制一次！请妥善保管您的API Key!只能在本地上，不能暴露给任何AI任何人！
 
 备份好API Key，然后就按照各个平台的官方文档去配置，填写到相应的位置即可。
 
+还有一些小网站用`sub2api`，这个可以自己去找
 
 ## 注意
 
-没有基础不建议vibecoding,别变成拿着localhost在社交平台上发疯的沙毕。
+AI会犯的错误都是人类不会犯的，它或许在其它方面表现得很好很安全，但是：
+- 鉴权：由于训练数据里开源的demo和tutorial代码太多，闭源的生产环境代码微乎其微，AI很多时候不会给你写鉴权
+- 不存在的包：AI毕竟还是概率模型，它觉得某个包存在就会给你`npm install`,如果有非白帽提前抢占了这个包名，那就完蛋了。
+- 敏感信息不存`.env`:现在这个问题还好，因为prisma等ORM会给你自动生成`.env`,某种程度上引导AI把信息放这里。
 
 基础教程：[链接](https://datawhalechina.github.io/easy-vibe/zh-cn/appendix/1-computer-fundamentals/vibe-coding-fullstack.html)
-
-最最起码的：知道每个文件分别负责什么，如果这个都判断不出就别做了。

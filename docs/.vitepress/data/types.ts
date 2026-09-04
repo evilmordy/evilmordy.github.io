@@ -3,6 +3,7 @@ export interface NoteArticle {
   link: string
   category: string
   path: string
+  date?: string
 }
 
 export interface NoteCategory {
@@ -13,6 +14,8 @@ export interface NoteCategory {
   link: string
   count: number
   subCount: number
+  dated: boolean
+  latestDate?: string
   articles: NoteArticle[]
 }
 

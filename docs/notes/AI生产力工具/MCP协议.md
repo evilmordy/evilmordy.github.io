@@ -96,3 +96,7 @@ Create a Next.js middleware that checks for a valid JWT in cookies and redirects
 [官网计费介绍页面](https://context7.com/plans)
 
 有Free Plan 但是有限制，限制频率和次数（好像是每月1000次）
+
+## MCP投毒
+
+事实上AI投毒无处不在，很多文件在人类眼里就是配置文件，但在Agent那里，配置文件几乎就是可执行文件，一旦从别的地方下载的MCP包含恶意攻击内容，Agent不会主动判断是否有害(至少现在是这样)而会直接执行。

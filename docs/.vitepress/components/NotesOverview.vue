@@ -25,14 +25,16 @@
             <img :src="category.img" :alt="category.title" />
           </div>
           <div class="notes-category__body">
-            <span>{{ category.count }} 篇 · {{ category.subCount || 1 }} 个专题</span>
+            <span v-if="category.latestDate">{{ category.count }} 篇 · 最新 {{ category.latestDate }}</span>
+            <span v-else>{{ category.count }} 篇 · {{ category.subCount || 1 }} 个专题</span>
             <h2>{{ category.title }}</h2>
             <p>{{ category.details }}</p>
           </div>
         </a>
         <div class="notes-category__articles">
           <a v-for="article in category.articles.slice(0, 4)" :key="article.path" :href="article.link">
-            {{ article.title }}
+            <time v-if="article.date" :datetime="article.date">{{ article.date }}</time>
+            <span>{{ article.title }}</span>
           </a>
         </div>
       </article>
@@ -238,15 +240,30 @@ useScrollReveal(pageRef, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' })
 }
 
 .notes-category__articles a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   overflow: hidden;
   padding: 9px 11px;
   border-radius: 12px;
   background: rgba(59, 130, 246, 0.08);
   color: var(--vp-c-text-2);
   text-decoration: none;
-  text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 0.86rem;
+}
+
+.notes-category__articles time {
+  flex: 0 0 auto;
+  color: var(--vp-c-brand-1);
+  font-size: 0.74rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.notes-category__articles span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .notes-category__articles a:hover {

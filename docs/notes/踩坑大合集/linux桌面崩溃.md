@@ -1,4 +1,8 @@
-# ROS2：关掉 rqt_image_view，整桌面让你注销
+---
+date: '2026-08-22'
+---
+
+# ROS2：关掉 rqt_image_view，桌面直接崩溃
 
 ---
 

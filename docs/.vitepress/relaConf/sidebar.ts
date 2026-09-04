@@ -1,6 +1,15 @@
 import { DefaultTheme } from "vitepress";
 import fs from "fs";
 import path from "path"
+import { compareByDateDesc, parseNoteDate } from "../data/noteDate";
+
+function readNoteDate(filePath: string, fileName: string): string | undefined {
+    try {
+        return parseNoteDate(fs.readFileSync(filePath, "utf8"), fileName)
+    } catch {
+        return undefined
+    }
+}
 
 function scanDir(dirPath: string, linkPrefix: string): DefaultTheme.SidebarItem[] {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true });
@@ -8,9 +17,20 @@ function scanDir(dirPath: string, linkPrefix: string): DefaultTheme.SidebarItem[
 
     const mdFiles = entries
         .filter((e) => e.isFile() && e.name.endsWith(".md") && e.name !== "index.md");
-    for (const file of mdFiles) {
+    const fileItems = mdFiles.map((file) => {
         const name = file.name.replace(/\.md$/, "");
-        items.push({ text: name, link: `${linkPrefix}/${name}` });
+        const date = readNoteDate(path.join(dirPath, file.name), file.name)
+        return {
+            text: date ? `${date} · ${name}` : name,
+            link: `${linkPrefix}/${name}`,
+            date,
+        }
+    })
+    if (fileItems.some((item) => item.date)) {
+        fileItems.sort(compareByDateDesc)
+    }
+    for (const item of fileItems) {
+        items.push({ text: item.text, link: item.link })
     }
 
     const subDirs = entries.filter((e) => e.isDirectory());
